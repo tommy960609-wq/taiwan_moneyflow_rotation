@@ -1,0 +1,95 @@
+Milestone 8: first-ever coverage measurement for this project.
+
+Context: spec §28.1 sets two coverage gates (core src/ >= 85%, whole project >= 75%),
+but the `coverage` package was never installed and the gates were never actually
+measured (loop/KNOWN_ISSUES.md #11 / docs/open_issues_audit_2026-07-19.md #10). This
+milestone's authorized scope is measurement only -- no test was added or changed to
+chase a number, no gate is being enforced here, and no code was touched to make
+coverage look better. This file is a one-time snapshot; re-run the commands below
+whenever an up-to-date number is needed.
+
+Commands run (in order), against the .venv used by the rest of this project:
+  .venv\Scripts\python.exe -m pip install coverage
+  PYTHONDONTWRITEBYTECODE=1 .venv\Scripts\python.exe -m coverage run -m pytest tests -p no:cacheprovider -q
+    -> 374 passed (full suite, including this milestone's own new tests)
+  .venv\Scripts\python.exe -m coverage report --include="src/*"             (core only)
+  .venv\Scripts\python.exe -m coverage report --include="src/*,scripts/*"   (whole project, per-file detail below)
+
+===============================================================================
+HEADLINE NUMBERS
+===============================================================================
+Core (src/ only):            86%  (2786 statements, 378 missed)
+Whole project (src/+scripts/): 80%  (4449 statements, 884 missed)
+
+Against spec §28.1's two gates:
+  - Core >= 85%     -> 86% MEETS the gate.
+  - Whole project >= 75% -> 80% MEETS the gate.
+
+Both gates are met on this first measurement. This is a measurement-only exercise per
+the task's explicit instruction ("只量測不設 gate、不改任何測試") -- no CI gate has been
+wired up, and this number will drift as code changes; treat it as a snapshot dated
+2026-07-19, not a standing guarantee.
+
+===============================================================================
+PER-FILE DETAIL (whole project: src/ + scripts/, statement coverage, `-m` shows
+missing line numbers)
+===============================================================================
+Name                                         Stmts   Miss  Cover   Missing
+--------------------------------------------------------------------------
+scripts\backfill_status.py                      85     32    62%   67-68, 89, 103, 158-185, 189-202, 206
+scripts\build_chinese_sector_mapping.py        111     14    87%   62, 66, 70, 75-77, 98, 165-167, 171-173, 231-232
+scripts\build_official_mapping.py              208     44    79%   74, 78, 108, 121, 141, 206, 277, 324-325, 369-374, 385, 434-450, 454-469
+scripts\daily_orchestrator.py                  152     23    85%   87, 91-93, 110, 114-115, 117, 121-122, 126, 158, 303-323, 327
+scripts\fetch_daily_data.py                     87     73    16%   28, 32-53, 64-87, 97-135, 139-166, 170
+scripts\prepare_finmind_legacy_snapshot.py     142     23    84%   51, 71, 84, 89-91, 105, 108-109, 111, 143, 166-167, 187, 190, 202, 260-267
+scripts\prepare_legacy_raw_snapshot.py          31      7    77%   73-82
+scripts\run_backtest.py                        280    201    28%   46, 50, 55-68, 74-85, 91-112, 186, 204-212, 221-230, 250-257, 268-338, 342-347, 353-483, 487-499
+scripts\run_daily.py                           419     60    86%   51, 55-56, 92-94, 98, 103-105, 116, 120-121, 140, 144-145, 159, 162-163, 187, 209, 212-213, 220, 232-234, 284-289, 303-307, 424-430, 444-447, 589-591, 607-608, 613-614, 636, 698-700
+scripts\run_history_pipeline.py                148     29    80%   51, 74, 79-80, 116, 120-121, 239-250, 290-296, 300-315
+src\backtester.py                              255     42    84%   273, 299, 333, 353, 357, 454, 509, 521-525, 544-594
+src\benchmarks.py                               93      6    94%   71, 84, 90, 139, 157, 162
+src\config_manager.py                           35      7    80%   13-15, 22-24, 43
+src\data_cleaner.py                            198     24    88%   13, 48-50, 54, 76, 91, 96, 111-114, 144-145, 158, 176-177, 181, 198, 229-232, 269, 309
+src\data_fetcher.py                            215     27    87%   94-98, 112, 127, 129, 131-137, 142, 154, 157, 168, 234-237, 243-244, 258-260, 405, 460
+src\data_loader.py                             186     73    61%   20-34, 37-38, 41-42, 46-72, 75-76, 79-80, 83-84, 87-88, 93-94, 97-99, 139, 144-146, 152-153, 189, 194-196, 214, 237, 242-244, 247, 276, 278
+src\data_validator.py                           86     15    83%   32-33, 37-38, 64-65, 74-75, 79-80, 84-85, 93-94, 115
+src\disposition_fetcher.py                     109     29    73%   124-152, 233, 257
+src\finmind_fetcher.py                         239     38    84%   144-145, 205-207, 216-217, 225-227, 372-380, 388-393, 395-399, 417-424, 429-432, 491-492, 517
+src\industry_mapper.py                          44      4    91%   14, 36, 53, 66
+src\institutional_features.py                   83      4    95%   54, 60, 120, 180
+src\labels.py                                   29      0   100%
+src\leaderboard_loader.py                       62      3    95%   93-95
+src\leaderboard_reconciliation.py               34      0   100%
+src\lifecycle_classifier.py                     65      5    92%   66, 116, 130, 135, 146
+src\limit_up_history.py                         51      1    98%   79
+src\margin_features.py                          27      3    89%   35, 41, 72
+src\market_regime.py                            81      8    90%   83, 150, 187, 196-200
+src\price_adjuster.py                          108     13    88%   122, 179-187, 200, 204-206, 259
+src\report_generator.py                        249      7    97%   181, 228-229, 338-339, 364-365
+src\sector_features.py                          78      8    90%   30, 78, 102, 123-126, 168
+src\sector_scoring.py                           72      1    99%   80
+src\signal_detector.py                         240     33    86%   160-175, 205, 220-227, 260, 278, 290, 306, 341, 349, 398, 404, 418, 438
+src\stock_features.py                           66     11    83%   29, 67-78, 102
+src\stock_scoring.py                            81     16    80%   62-63, 68-70, 74, 88-89, 91-92, 96-100, 122
+--------------------------------------------------------------------------
+TOTAL                                         4449    884    80%
+
+===============================================================================
+NOTABLE LOW-COVERAGE FILES (informational only, not acted on this milestone --
+governance rule #9 forbids touching backtest/scoring logic without sign-off, and
+"only measure, don't chase the number" is this task's explicit instruction)
+===============================================================================
+- scripts\run_backtest.py: 28% -- the heaviest orchestration paths (real multi-day
+  backtest execution, N=10000 bootstrap) are exercised by real historical-data runs
+  and long-running integration tests, not by the fast unit suite; this is a known
+  shape for this file, not a new gap.
+- scripts\fetch_daily_data.py: 16% -- thin CLI wrapper around already-tested fetcher
+  classes; the wrapper's own argument-parsing/orchestration lines aren't separately
+  unit-tested.
+- scripts\backfill_status.py: 62% -- this milestone's own new tool; unit tests cover
+  the core scan/compute functions (compute_backfill_status, _scan_category,
+  _get_universe_size) but not the argparse `main()`/CLI entry point or the
+  human-readable table renderer's every branch.
+- src\data_loader.py: 61% -- the legacy pre-M4 live-fetch fallback paths
+  (fetch_twse_ohlcv_all/fetch_tpex_ohlcv_all) are mocked out in most tests rather
+  than exercised for real (by design, to keep the suite hermetic/fast).
