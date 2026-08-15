@@ -1,0 +1,107 @@
+# Taiwan Moneyflow Rotation System - Default Configuration
+# IMPORTANT: All prior thresholds and weights are placeholders before calibration.
+
+system:
+  run_mode: "production"
+  data_dir: "C:/Workspace_CN/taiwan_moneyflow_rotation/data"
+  output_dir: "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs"
+  log_level: "INFO"
+
+# Data Quality Thresholds
+data_quality:
+  min_completeness_pct: 0.90
+  min_mapping_rate_pct: 0.80
+  score_warnings_threshold: 85
+  score_blocked_threshold: 70
+
+# Market coverage guard (scripts/run_daily.py). PLACEHOLDER - UNCALIBRATED.
+market_coverage:
+  recent_success_days: 10
+  min_coverage_ratio: 0.80
+
+# Observe-only ranking display settings. PLACEHOLDER - UNCALIBRATED; not signal gates.
+observe_rankings:
+  ranking_depth: 300
+  sector_top_n: 5
+
+# Leaderboard Reconciliation (scripts/run_daily.py::load_excel_leaderboard)
+# Directory glob-searched (recursively) for Report_<YYYYMMDD>.xlsx historical
+# leaderboard files used as an external cross-check on daily scoring. Was hardcoded
+# before M8; default below preserves the pre-M8 path exactly (behavior-neutral).
+# If the directory doesn't exist, reconciliation is silently skipped (logged), never
+# blocks the pipeline.
+reconciliation:
+  leaderboard_dir: "C:/Workspace_CN/Quant-Agent"
+
+# Sector Scoring Weights
+# PLACEHOLDER - UNCALIBRATED (From original specification §12.1)
+weights:
+  breadth: 0.25         # 族群上漲廣度
+  volume_share: 0.25    # 成交資源與集中度
+  strength: 0.20        # 相對強度
+  momentum: 0.15        # 延續性
+  institution: 0.10     # 法人籌碼
+  health: 0.05          # 結構健康度 (HHI and anomalies)
+
+# New Gainer (新起漲) Detection Thresholds
+# PLACEHOLDER - UNCALIBRATED (From original specification §14)
+# Each of the 10 conditions below maps 1:1 to SPEC Chapter 14 rule numbers (see
+# docs/signal_definitions.md section "New Gainer 10-Condition Checklist").
+# NOTE: this YAML file is NOT actually read by src/signal_detector.py at runtime
+# (SignalDetector() is instantiated with no config args in scripts/run_daily.py) --
+# it documents the module-level DEFAULT_NEW_GAINER_CONFIG/DEFAULT_CONTINUED_MOMENTUM_
+# CONFIG constants in src/signal_detector.py, which are the values actually in effect.
+# Keep both in sync by hand; this is a pre-existing gap, not introduced this milestone.
+# Milestone 9: min_score/prev_score_max (new_gainer) and min_score (continued_momentum)
+# below are CALIBRATED (n=28 trading days, 2026-04-20~2026-07-17) - PRELIMINARY, small
+# sample -- see src/signal_detector.py's own comment and
+# docs/Milestone_9_Calibration_Backtest_Report.md. The literal numbers below are the
+# FALLBACK value only (used when a sector lacks enough rolling history); the values in
+# effect when use_calibrated_thresholds=True are per-sector rolling quantiles
+# (src/threshold_calibration.py), which cannot be written as one static number here.
+new_gainer:
+  min_score: 70                    # rule 1: today's sector score >= 70 (CALIBRATED fallback, see note above)
+  prev_score_max: 55                # rule 2: previous-day score < 55 (CALIBRATED fallback, see note above) ...
+  score_breakout_days: 5             # ... or first breakout to >=70 within last 5 days
+  min_rank100_change: 3               # rule 3: top-100 membership count grew by >= 3 stocks vs prior day
+  min_volume_growth_pct: 0.50         # rule 4: volume_share grew by >= 50% vs prior day
+  min_excess_return_pct: 2.0          # rule 5: sector median return exceeds market median by >= 2.0 percentage points
+  min_top50_count: 2                  # rule 6: at least 2 stocks in the sector rank in the market top 50
+  max_top1_volume_pct: 0.70           # rule 7: single-largest stock's turnover share of the sector must be <= 70%
+  max_overheat_days: 3                # rule 8: not in extreme-overheat state for 3 consecutive days
+  min_data_quality_score: 85          # rule 9: pipeline data quality score must be >= 85
+  min_mapping_coverage_pct: 0.80      # rule 10: industry mapping coverage must be >= 80%
+  # Grading: A requires all 10 conditions pass. B allows up to this many condition
+  # failures; rules 7-10 are safety/data vetoes, while rule 6 is a breadth/core
+  # condition. The separate UAT-04 stock-count gate still blocks sector-level A/B.
+  max_conditions_failed_for_b: 4
+  # PLACEHOLDER - UNCALIBRATED: selectivity design default, not optimized from
+  # forward returns. B also requires at least one breadth rule (3 or 6) to pass.
+  min_core_passed_for_b: 3
+  min_breadth_core_passed_for_b: 1
+
+# Continued Momentum (續漲) Detection Thresholds
+# PLACEHOLDER - UNCALIBRATED (From original specification §15)
+# Each condition maps 1:1 to SPEC Chapter 15 rule numbers.
+continued_momentum:
+  min_score_days: 2                  # rule 1: sector score >= min_score for >= 2 consecutive days
+  min_score: 65                      # CALIBRATED fallback (n=28 trading days) - PRELIMINARY, see note above
+  min_volume_share_maintained: true   # rule 2: volume_share flat or rising vs prior day
+  max_rank100_drop_pct: 0.30          # rule 3: top-100 membership count has not fallen more than 30%
+  min_excess_return_pct: 0.0          # rule 4: sector median return continues to beat market median
+  max_overheat_risk: 75               # rule 7: overheat_risk score must stay below 75
+  min_data_quality_score: 70          # rule 9: data quality sufficient to support the call (lower bar than new-gainer)
+
+# Backtest Settings
+# PLACEHOLDER - UNCALIBRATED (From original specification §19.5)
+backtest:
+  slippage_pct: 0.001
+  fee_pct: 0.001425
+  tax_pct: 0.003
+  entry_delay_days: 1   # Buy at T+1 Open
+  # M7: use ex-dividend backward-adjusted close/open when a computed adjustment
+  # factor exists for the stock (data/reference/price_adjustment_factors.csv);
+  # falls back to raw (unadjusted) price per-stock, tagged UNADJUSTED, when no
+  # factor is available. Default true because unadjusted returns are structurally
+  # understated across Apr-Jul (peak TW dividend season) -- see M7 report.
+  use_adjusted_prices: true
