@@ -1,0 +1,54 @@
+{
+  "registered_at": "2026-08-04T10:32:19",
+  "cutoff_date": "2026-08-03",
+  "oos_starts_from": "2026-08-04",
+  "rationale": "2026-04-20..2026-08-03 全部已被 M9 校準 / M10 選擇性改版 / 20260804 勝率驗證使用過，屬 in-sample；在同一批資料上再調門檻等同曲線擬合，故凍結現況、只收 2026-08-04 起的新樣本。",
+  "code_fingerprint": {
+    "src/signal_detector.py": "29f4d030956a1314b044fba7926a2c76febc5eab7c7c3141992c8b5be1d3ec25",
+    "src/stock_scoring.py": "6e31402c824f985e0621ddb7f14dde9e83b714cbdf1fe7f7f73dcc19d15ad6d0",
+    "src/threshold_calibration.py": "d18249c65f7dce06a98a7e1ffefd597ca70f200490ea382b5bbf6b928d6ea6f3",
+    "src/backtester.py": "215d81f166dd6435e1ccfffac9e4c9c3c9709ac63296c185bfed06212af8b6bb",
+    "config/default.yaml": "b3df4fa4704b60855a6080fed530b05d9ea9850940a4968c3b87779e0f5a61eb"
+  },
+  "code_fingerprint_combined": "5fb4de8e19869f7d",
+  "code_fingerprint_rule": "combined = sha256(json.dumps(per-file map, sort_keys=True, ensure_ascii=False))[:16]；五個檔任一改動即視為換一個實驗，新舊樣本嚴禁合併統計。",
+  "in_sample_baseline": {
+    "A級新起漲": {
+      "n_realized": 1,
+      "median_excess_pct": -2.8516916789684386,
+      "win_rate": 0.0
+    },
+    "B級早期點火": {
+      "n_realized": 4,
+      "median_excess_pct": -4.168849841968382,
+      "win_rate": 0.0
+    },
+    "C級個股事件": {
+      "n_realized": 507,
+      "median_excess_pct": -2.4796675267127664,
+      "win_rate": 0.3333333333333333
+    },
+    "續漲訊號": {
+      "n_realized": 75,
+      "median_excess_pct": -0.36334093839216486,
+      "win_rate": 0.4533333333333333
+    },
+    "momentum_baseline_median_excess_pct": -0.38748691521204753,
+    "source": "Quant-Agent/_workbench/out/moneyflow_winrate_refresh_20260804/final_backtest_summary.json"
+  },
+  "decision_rule": {
+    "primary_horizon_days": 10,
+    "min_realized_events_per_tier": 30,
+    "success_criteria": "該評級 OOS 10 日超額報酬中位數 > 0 且 > 同期動能基準中位數 且 勝率 > 50%",
+    "note": "本規則於看到任何 OOS 數據前寫定，事後不得修改；要改必須新開一份 registration 並重新計時。升級 active 另需三條件同時成立：已實現樣本 ≥30、T+10 已成熟、使用者拍板。"
+  },
+  "method_notes": {
+    "return_engine": "一律沿用 src/backtester.py 的 Backtester.run_event_study（內含 extract_events / compute_entry_price / compute_stock_forward_returns / compute_market_forward_returns / apply_trading_cost），不另寫報酬或成本公式。",
+    "event_extraction_window": "extract_events 吃全部已落盤的 signals（含 cutoff 前），以正確判斷 2026-08-04 的訊號是全新點火還是前一日事件的延續；但只有 trade_date >= 2026-08-04 的事件能進帳本。cutoff 前的列僅作為 run-length 上下文，不含任何未來結果資訊。",
+    "ohlcv_source": "data/processed/stock_features_<date>.csv（官方 TWSE/TPEx 管線輸出）。不用 data/raw/ohlcv/finmind_*.json：FinMind 快取停在 2026-07-17 且額度已用盡，無法覆蓋任何 OOS 日期。",
+    "taiex_source": "data/raw/market_index/twse_<date>.json 的『發行量加權股價指數』，三道守衛：名稱含發行且含加權且不含報酬、去千分位逗號、自報 ROC 日期需與檔名日期相符。",
+    "difference_vs_in_sample_run": "in-sample 驗證跑 use_adjusted_prices=True，但實測 unadjusted_stock_pct=0.9995（僅 0.05% 個股有還原因子），故與本帳本未套用還原的差異在數值上可忽略；此處據實揭露，不宣稱兩者完全等價。in-sample 另傳入 41 檔處置股清單，但該欄僅影響記錄用的 weight_penalty，不進入報酬計算，故無數值差異。"
+  },
+  "loop_status": "observe",
+  "task_spec": ".ai/tasks/TASK-20260804-moneyflow-forward-test-ledger.md"
+}

@@ -1,0 +1,73 @@
+{
+  "trade_date": "2026-07-25",
+  "results": {
+    "ohlcv": {
+      "twse": null,
+      "tpex": null
+    },
+    "institutional": {
+      "twse": {
+        "row_count": 2,
+        "http_status": 200
+      },
+      "tpex": null
+    },
+    "margin": {
+      "twse": {
+        "row_count": 1287,
+        "http_status": 200
+      },
+      "tpex": null
+    },
+    "market_index": {
+      "twse": {
+        "row_count": 267,
+        "http_status": 200
+      },
+      "tpex": null
+    }
+  },
+  "failures": [
+    {
+      "category": "ohlcv",
+      "market": "twse",
+      "trade_date": "2026-07-25",
+      "url": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
+      "error": "DATE_MISMATCH",
+      "payload_date": "2026-07-24"
+    },
+    {
+      "category": "ohlcv",
+      "market": "tpex",
+      "trade_date": "2026-07-25",
+      "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
+      "error": "DATE_MISMATCH",
+      "payload_date": "2026-07-24"
+    },
+    {
+      "category": "institutional",
+      "market": "tpex",
+      "trade_date": "2026-07-25",
+      "url": "https://www.tpex.org.tw/openapi/v1/tpex_3insti_daily_trading",
+      "error": "DATE_MISMATCH",
+      "payload_date": "2026-07-24"
+    },
+    {
+      "category": "margin",
+      "market": "tpex",
+      "trade_date": "2026-07-25",
+      "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_margin_balance",
+      "error": "DATE_MISMATCH",
+      "payload_date": "2026-07-24"
+    },
+    {
+      "category": "market_index",
+      "market": "tpex",
+      "trade_date": "2026-07-25",
+      "url": "https://www.tpex.org.tw/openapi/v1/tpex_index",
+      "error": "DATE_MISMATCH",
+      "payload_date": "2026-07-01"
+    }
+  ],
+  "historical_recovery": []
+}

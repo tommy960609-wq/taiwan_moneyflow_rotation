@@ -1,0 +1,26 @@
+{
+  "run_date": "2026-07-18",
+  "mapping_path": "C:/Workspace_CN/taiwan_moneyflow_rotation/data\\reference\\stock_industry_mapping.xlsx",
+  "twse_fetch": {
+    "success": false,
+    "http_status": null,
+    "error": "Request exception: HTTPSConnectionPool(host='openapi.twse.com.tw', port=443): Max retries exceeded with url: /v1/opendata/t187ap03_L (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000001A11CABF610>, 'Connection to openapi.twse.com.tw timed out. (connect timeout=30)'))",
+    "row_count": 0
+  },
+  "tpex_fetch": {
+    "success": false,
+    "http_status": null,
+    "error": "Request exception: HTTPSConnectionPool(host='www.tpex.org.tw', port=443): Max retries exceeded with url: /openapi/v1/mopsfin_t187ap03_O (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000001A11CABFD90>, 'Connection to www.tpex.org.tw timed out. (connect timeout=30)'))",
+    "row_count": 0
+  },
+  "industry_code_lookup_status": null,
+  "coverage_before": 0.9858156028368794,
+  "coverage_after": 0.9858156028368794,
+  "rows_before": 1963,
+  "rows_after": 1963,
+  "official_rows_twse": 0,
+  "official_rows_tpex": 0,
+  "reviewed_rows_protected": 0,
+  "status": "BLOCKED_BOTH_FETCH_FAILED",
+  "coverage_metric": "universe"
+}

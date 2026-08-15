@@ -1,0 +1,28 @@
+2026-07-28 TASK-daily-report-field second-batch validation
+
+Baseline command:
+.venv\Scripts\python.exe -m pytest tests -p no:cacheprovider -q --basetemp _workbench\pytest_tmp_secondbatch
+Result: 493 passed in 136.93s.
+
+Final command:
+.venv\Scripts\python.exe -m pytest tests -p no:cacheprovider -q --basetemp _workbench\pytest_tmp_secondbatch
+Result: 494 passed in 146.85s.
+
+Focused validation: 5 passed in 51.17s (observe config, fail-open build/write, and m3 E2E).
+M3 E2E was repeated twice. The real 2026-07-16 workbook SHA-256 was unchanged before and after:
+eb1ddc66287a3d242d54adb67c21ecbd65142708f44b5d15624d96615e19fb72
+
+=== E redo 後最終狀態(2026-07-28 下午,對抗式複驗)===
+第一輪 E 因死設定被 REJECT;重做接線後複驗通過。
+主對話驗收員親跑全套(獨立重跑,非 Codex 自報):
+  496 passed in 69.45s (0:01:09)
+  還原改壞測試後複跑:496 passed in 69.84s (0:01:09)
+帳目:494 - 1(刪除字面值互比的死測試)+ 2(參數化)+ 1(新增接線行為測試)= 496
+決定性實測(改真 yaml、不 patch ConfigManager、隔離 output_dir):
+  yaml 300/5 -> metadata.ranking_depth=300, selected_stock_count=300/300/300, top 清單 5 筆
+  yaml  50/2 -> metadata.ranking_depth=50,  selected_stock_count=50/50/50,   top 清單 2 筆
+  移除 observe_rankings 區塊 -> fallback 300/5,不報錯不歸零
+行為零變更:預設值產出 rankings JSON sha256 = d22a8d3f...d70a,
+  與正式 outputs/observe/rankings_2026-07-16.json 完全相同。
+驗證零殘留:yaml 改 3 次、run_daily.py 改壞 1 次,全部備份+還原+sha256 比對一致;
+  outputs/ + data/ 共 5,927 檔 sha256 四次全量比對逐位一致。

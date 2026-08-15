@@ -1,0 +1,76 @@
+﻿.\.venv\Scripts\python.exe : Exception in thread Thread-1 (_readerthread):
+At line:1 char:380
++ ... BYTECODE=1; .\.venv\Scripts\python.exe "C:\Users\tommy\AppData\Local\ ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Exception in th..._readerthread)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Traceback (most recent call last):
+  File "C:\Python314\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Python314\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\subprocess.py", line 1613, in _readerthread
+    buffer.append(fh.read())
+                  ~~~~~~~^^
+UnicodeDecodeError: 'cp950' codec can't decode byte 0x8f in position 447: illegal multibyte sequence
+Exception in thread Thread-3 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Python314\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Python314\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\subprocess.py", line 1613, in _readerthread
+    buffer.append(fh.read())
+                  ~~~~~~~^^
+UnicodeDecodeError: 'cp950' codec can't decode byte 0xe7 in position 1069: illegal multibyte sequence
+Exception in thread Thread-5 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Python314\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Python314\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\subprocess.py", line 1613, in _readerthread
+    buffer.append(fh.read())
+                  ~~~~~~~^^
+UnicodeDecodeError: 'cp950' codec can't decode byte 0xe6 in position 469: illegal multibyte sequence
+Exception in thread Thread-7 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Python314\Lib\threading.py", line 1082, in _bootstrap_inner
+    self._context.run(self.run)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Python314\Lib\threading.py", line 1024, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\subprocess.py", line 1613, in _readerthread
+    buffer.append(fh.read())
+                  ~~~~~~~^^
+UnicodeDecodeError: 'cp950' codec can't decode byte 0x8f in position 358: illegal multibyte sequence
+baseline sha256 = 8539844a4f3efeadd7bc418ee3856639bd5a0d7288d638f861267750a46e17aa
+
+[A. _find_dated_table requires EXACTLY one match]
+   reverted -> RED (good) | 
+   restored sha256 match: True
+
+[B. envelope-level date check]
+   reverted -> RED (good) | 
+   restored sha256 match: True
+
+[C. institutional/tpex column offsets (shift 投信 group by one triplet)]
+   reverted -> RED (good) | 
+   restored sha256 match: True
+
+[D. column-count check]
+   reverted -> RED (good) | 
+   restored sha256 match: True
+
+after restore, full dated suite: 16 passed in 0.99s
+final sha256 = 8539844a4f3efeadd7bc418ee3856639bd5a0d7288d638f861267750a46e17aa
+
+ALL RED-GREEN PROOFS PASSED: True

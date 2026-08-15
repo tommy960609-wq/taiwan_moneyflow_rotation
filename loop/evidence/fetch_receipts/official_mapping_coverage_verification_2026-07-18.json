@@ -1,0 +1,36 @@
+{
+  "note": "The successful official_mapping_receipt_2026-07-18.json transition (0.41% -> 98.58%) was overwritten in-place by a later same-day retry that hit the sandbox network outage (both TWSE/TPEx fetches failed, status BLOCKED_BOTH_FETCH_FAILED, correctly left the mapping file untouched). The mapping file itself (data/reference/stock_industry_mapping.xlsx) was NOT lost or reverted -- it still holds the successful import's 1,963 rows. This file independently re-verifies that state directly against the real mapping file and a real trading-universe snapshot, without re-hitting the network.",
+  "verification_method": "python -c using src.data_cleaner.DataCleaner + src.industry_mapper.IndustryMapper against the real data/raw/ohlcv/{twse,tpex}_2026-07-17.json snapshots (1,371 + 10,012 raw rows -> 1,974 cleaned equities)",
+  "coverage_before_official_import": {
+    "description": "Coverage using ONLY the original 8 manually-reviewed rows (reviewed=1), reconstructed by filtering the current mapping file to reviewed==1",
+    "mapped_stocks": 8,
+    "universe_size": 1974,
+    "coverage_pct": 0.0041,
+    "coverage_pct_display": "0.41%"
+  },
+  "coverage_after_official_import": {
+    "description": "Coverage using the current live mapping file (1,963 rows: 8 manually-reviewed + 1,955 official TWSE/TPEx rows)",
+    "mapped_stocks": 1946,
+    "universe_size": 1974,
+    "coverage_pct": 0.9858156028368794,
+    "coverage_pct_display": "98.58%"
+  },
+  "mapping_file_row_counts": {
+    "rows_before_import": 8,
+    "rows_after_import": 1963,
+    "official_rows_added": {
+      "twse": 1079,
+      "tpex": 884
+    },
+    "reviewed_rows_protected": 8
+  },
+  "reviewed_rows_untouched_spotcheck": {
+    "stock_id": "2330",
+    "stock_name": "台積電",
+    "primary_sector": "半導體",
+    "reviewed": 1,
+    "note": "Confirmed unchanged after the official import merge (primary_sector is the human-curated Chinese label, not the raw TWSE industry code that would have been written if this row were not protected)"
+  },
+  "industry_code_lookup_status": "UNAVAILABLE",
+  "industry_code_lookup_note": "Neither TWSE nor TPEx's cached swagger definitions expose a dedicated industry-code-to-Chinese-name lookup endpoint (searched all summaries/descriptions containing 產業/類股/分類 in both loop/evidence/raw_samples/{twse,tpex}_swagger.json). TWSE's own company-basic-data payload (產業別 field) and TPEx's (SecuritiesIndustryCode field) both return a raw numeric code (e.g. \"01\", \"28\"), not the Chinese category name. The 1,955 official-import rows therefore have primary_sector set to this raw code, not a resolved Chinese label -- disclosed, not hidden, in the Dashboard sector-name column of the real 7/17 report."
+}

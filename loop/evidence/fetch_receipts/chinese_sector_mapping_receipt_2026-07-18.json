@@ -1,0 +1,75 @@
+{
+  "run_date": "2026-07-18",
+  "mapping_path": "C:/Workspace_CN/taiwan_moneyflow_rotation/data\\reference\\stock_industry_mapping.xlsx",
+  "stock_info_path": "C:/Workspace_CN/taiwan_moneyflow_rotation/data\\raw\\fundamentals\\finmind_stock_info.json",
+  "status": "SUCCESS",
+  "rows_before": 1963,
+  "sample_before": [
+    {
+      "stock_id": "2330",
+      "stock_name": "台積電",
+      "primary_sector": "半導體",
+      "reviewed": 1
+    },
+    {
+      "stock_id": "2317",
+      "stock_name": "鴻海",
+      "primary_sector": "電腦週邊",
+      "reviewed": 1
+    },
+    {
+      "stock_id": "1101",
+      "stock_name": "台泥",
+      "primary_sector": "01",
+      "reviewed": 0
+    },
+    {
+      "stock_id": "1102",
+      "stock_name": "亞泥",
+      "primary_sector": "01",
+      "reviewed": 0
+    }
+  ],
+  "finmind_unique_stock_ids_with_category": 2758,
+  "backup_path": "C:/Workspace_CN/taiwan_moneyflow_rotation/data\\reference\\stock_industry_mapping.bak_2026-07-18.xlsx",
+  "update_stats": {
+    "rows_total": 1963,
+    "reviewed_protected": 8,
+    "eligible_for_update": 1955,
+    "updated": 1955,
+    "not_covered_by_finmind": 0
+  },
+  "sample_after": [
+    {
+      "stock_id": "2330",
+      "stock_name": "台積電",
+      "primary_sector": "半導體",
+      "sector_code": null,
+      "reviewed": 1
+    },
+    {
+      "stock_id": "2317",
+      "stock_name": "鴻海",
+      "primary_sector": "電腦週邊",
+      "sector_code": null,
+      "reviewed": 1
+    },
+    {
+      "stock_id": "1101",
+      "stock_name": "台泥",
+      "primary_sector": "水泥工業",
+      "sector_code": "01",
+      "reviewed": 0
+    },
+    {
+      "stock_id": "1102",
+      "stock_name": "亞泥",
+      "primary_sector": "水泥工業",
+      "sector_code": "01",
+      "reviewed": 0
+    }
+  ],
+  "rows_after": 1963,
+  "output_xlsx": "C:/Workspace_CN/taiwan_moneyflow_rotation/data\\reference\\stock_industry_mapping.xlsx",
+  "output_csv": "C:/Workspace_CN/taiwan_moneyflow_rotation/data\\reference\\stock_industry_mapping.csv"
+}

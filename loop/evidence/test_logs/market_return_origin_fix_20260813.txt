@@ -1,0 +1,65 @@
+market_return_origin_fix_20260813 T3 red-green evidence
+================================================================
+
+All commands ran from C:\Workspace_CN\taiwan_moneyflow_rotation with the project
+.venv\Scripts\python.exe and no network access.
+
+[修正版 before rollback]
+Command:
+.venv\Scripts\python.exe -X utf8 -m pytest tests\unit\test_backtester.py -p no:cacheprovider -q
+
+Output:
+..................................                                       [100%]
+34 passed in 0.61s
+
+修正版_restore_cycle_before_sha256 c28286b2e68ad4c630be2de8bc0a2076d21bf9886a54ead63f33ce719f1ecc5c
+
+[暫時還原舊版]
+Command:
+.venv\Scripts\python.exe -X utf8 -m pytest tests\unit\test_backtester.py -p no:cacheprovider -q
+
+Output:
+......................FFFF........                                       [100%]
+=================================== FAILURES ===================================
+_________________________ test_market_forward_returns _________________________
+E       assert 0.0 == 0.01 ± 1.0e-08
+E       Obtained: 0.0
+E       Expected: 0.01 ± 1.0e-08
+____________ test_market_forward_returns_first_trade_date_is_none _____________
+E       assert {1: 0.0, 2: 0.01} == {1: None, 2: None}
+E       {1: 0.0} != {1: None}
+E       {2: 0.01} != {2: None}
+________ test_market_forward_returns_deduplicates_trade_date_keep_last ________
+E       assert 0.0 == 0.01 ± 1.0e-08
+E       Obtained: 0.0
+E       Expected: 0.01 ± 1.0e-08
+___________ test_market_forward_returns_invalid_prior_close_is_none __________
+E       assert {1: 0.0, 2: 0.009900990099009901} == {1: None, 2: None}
+E       {1: 0.0} != {1: None}
+E       {2: 0.009900990099009901} != {2: None}
+=========================== short test summary info ============================
+FAILED tests/unit/test_backtester.py::test_market_forward_returns
+FAILED tests/unit/test_backtester.py::test_market_forward_returns_first_trade_date_is_none
+FAILED tests/unit/test_backtester.py::test_market_forward_returns_deduplicates_trade_date_keep_last
+FAILED tests/unit/test_backtester.py::test_market_forward_returns_invalid_prior_close_is_none
+4 failed, 30 passed in 0.82s
+old_code_test_exit=1
+
+[恢復修正版]
+Command:
+.venv\Scripts\python.exe -X utf8 -c "import hashlib;..."
+Output:
+修正版_restore_cycle_after_sha256 c28286b2e68ad4c630be2de8bc0a2076d21bf9886a54ead63f33ce719f1ecc5c
+restored_sha_matches True
+
+Command:
+.venv\Scripts\python.exe -X utf8 -m pytest tests\unit\test_backtester.py -p no:cacheprovider -q
+
+Output:
+..................................                                       [100%]
+34 passed in 0.60s
+restored_green_exit=0
+
+Conclusion: the old implementation fails the four new regression cases; the restored
+implementation passes them, and its SHA-256 is byte-for-byte identical to the captured
+修正版 hash before rollback.

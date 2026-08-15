@@ -1,0 +1,262 @@
+{
+  "date": "2026-07-18",
+  "stocks": {
+    "052974": {
+      "kind": "disposition",
+      "sources": [
+        "twse_punish"
+      ]
+    },
+    "066762": {
+      "kind": "disposition",
+      "sources": [
+        "twse_punish"
+      ]
+    },
+    "1515": {
+      "kind": "disposition",
+      "sources": [
+        "twse_punish"
+      ]
+    },
+    "1718": {
+      "kind": "disposition",
+      "sources": [
+        "twse_punish"
+      ]
+    },
+    "2434": {
+      "kind": "disposition",
+      "sources": [
+        "twse_punish",
+        "twse_punish"
+      ]
+    },
+    "2466": {
+      "kind": "disposition",
+      "sources": [
+        "twse_punish"
+      ]
+    },
+    "2492": {
+      "kind": "disposition",
+      "sources": [
+        "twse_punish"
+      ]
+    },
+    "3055": {
+      "kind": "disposition",
+      "sources": [
+        "twse_punish"
+      ]
+    },
+    "3090": {
+      "kind": "disposition",
+      "sources": [
+        "twse_punish"
+      ]
+    },
+    "4169": {
+      "kind": "disposition",
+      "sources": [
+        "twse_punish"
+      ]
+    },
+    "6831": {
+      "kind": "disposition",
+      "sources": [
+        "twse_punish"
+      ]
+    },
+    "8261": {
+      "kind": "disposition",
+      "sources": [
+        "twse_punish"
+      ]
+    },
+    "2061": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "2719": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "3236": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "3288": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "3363": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "3491": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "3529": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "3624": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "3675": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "4139": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info",
+        "tpex_warning_note"
+      ]
+    },
+    "4931": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "4991": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info",
+        "tpex_warning_note"
+      ]
+    },
+    "5328": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "5425": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "5489": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "6173": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "6182": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "6223": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "6274": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "6291": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "6435": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "6683": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "6727": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "6907": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "707085": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "707267": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "8043": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "8383": {
+      "kind": "attention",
+      "sources": [
+        "tpex_warning_info"
+      ]
+    },
+    "6878": {
+      "kind": "attention",
+      "sources": [
+        "tpex_esb_warning"
+      ]
+    }
+  },
+  "per_endpoint_real_row_counts": {
+    "twse_punish": 13,
+    "twse_notice": 0,
+    "tpex_warning_info": 28,
+    "tpex_warning_note": 2,
+    "tpex_esb_warning": 1
+  },
+  "failures": []
+}

@@ -1,0 +1,165 @@
+==============================================================================
+TWSE 2026-07-20 TAIEX backfill receipt
+==============================================================================
+
+[1] NETWORK ATTEMPTS
+  attempt 1/3  time=2026-07-29T09:35:26  client=python-requests
+    url            : https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20260720&type=ALLBUT0999
+    http_status    : 200
+    response_bytes : 247240
+    content_type   : application/json;charset=UTF-8
+    result         : SUCCESS
+  attempts 2 and 3 : not used (attempt 1 succeeded)
+  raw response sha256: ce2506445d9967ca8ced4970e6cc7a566c285547246a3e4200f6c19539923e67
+
+  Prior-round note: PowerShell Invoke-WebRequest failed on this same endpoint
+  with NullReferenceException. Python requests on the identical URL returned
+  HTTP 200, so that failure was client-side, not endpoint-side.
+
+[2] GUARD 2 - DATE GUARD (must self-report 2026-07-20 / ROC 1150720)
+  response 'date' field verbatim : '20260720'
+  response 'stat' field verbatim : 'OK'
+  table title carrying a date   : '115年07月20日 價格指數(臺灣證券交易所)'
+  table title carrying a date   : '115年07月20日 大盤統計資訊'
+  table title carrying a date   : '115年07月20日 每日收盤行情(全部(不含權證、牛熊證、可展延牛熊證))'
+  date field == '20260720'      : True
+  a title contains '115年07月20日': True
+  GUARD 2: PASS
+
+[3] GUARD 1 - NAME FILTER (contains 發行 AND 加權, excludes 報酬)
+  index rows scanned (all index tables): 267
+  candidates matching 發行 AND 加權   : 2
+    candidate: '發行量加權股價指數'  收盤指數='42,449.70'   [table: 115年07月20日 價格指數(臺灣證券交易所)]
+    candidate: '發行量加權股價報酬指數'  收盤指數='97,721.96'   [table: 報酬指數(臺灣證券交易所)]
+  excluded by the 報酬 rule          : 1
+    EXCLUDED: '發行量加權股價報酬指數' = '97,721.96'  <- return index, NOT TAIEX  [table: 報酬指數(臺灣證券交易所)]
+  rows surviving all three name tests: 1 (must be exactly 1)
+  GUARD 1: PASS
+
+[4] SELECTED ROW (verbatim JSON as returned by TWSE)
+  source table : 115年07月20日 價格指數(臺灣證券交易所)
+  fields       : ["指數", "收盤指數", "漲跌(+/-)", "漲跌點數", "漲跌百分比(%)", "特殊處理註記"]
+  raw row      : ["發行量加權股價指數", "42,449.70", "<p style ='color:green'>-</p>", "221.57", "-0.52", ""]
+
+[5] GUARD 3 - THOUSANDS SEPARATOR
+  raw 收盤指數 string : '42,449.70'
+  after removing ','  : '42449.70'
+  parsed float        : 42449.7
+  GUARD 3: PASS
+
+[6] CONTINUITY CROSS-CHECK
+  2026-07-17 close (on disk) : 42671.27
+  2026-07-20 close (fetched) : 42449.7
+  2026-07-21 close (given)   : 44232.87
+  TWSE-reported 漲跌 sign / 點數 / 百分比 : '-' / 221.57 / -0.52%
+  internal check: 42671.27 - 221.57 = 42449.7  (matches fetched close: True)
+  sanity band 41000.0..46000.0 : INSIDE
+  SANITY: PASS
+
+[7] PERSISTED
+  path            : C:\Workspace_CN\taiwan_moneyflow_rotation\data\raw\market_index\twse_official_2026-07-20.json
+  payload rows    : 267 (all index rows, mirrors the 267-row sibling schema)
+  TAIEX row saved : {"日期": "1150720", "指數": "發行量加權股價指數", "收盤指數": "42,449.70", "漲跌": "-", "漲跌點數": "221.57", "漲跌百分比": "-0.52", "特殊處理註記": ""}
+  file sha256     : eae08eccd4d54edf7f9c9db15522fdae288b35ecd6116235a74a860f64b5ec44
+  file bytes      : 66717
+
+  Note: 收盤指數/漲跌點數 keep TWSE's verbatim strings (thousands separators
+  included). The reader's _number_or_none() strips ',' at parse time, so the
+  values are preserved exactly as published rather than silently reformatted.
+  Only the 漲跌 column had presentation HTML stripped, to match the sibling
+  snapshots' plain '+'/'-' convention.
+
+[8] GUARD SUMMARY
+  Guard 1 name filter (發行+加權, not 報酬), exactly 1 hit : PASS
+  Guard 2 self-reported date == 2026-07-20 / 1150720      : PASS
+  Guard 3 thousands separator stripped before float()     : PASS
+  Continuity sanity band                                  : PASS
+  FINAL 2026-07-20 TAIEX CLOSE = 42449.7
+
+[9] UNTOUCHED-FILE PROOF (SHA-256, before -> after the whole operation)
+  twse_2026-07-20.json      (contaminated, must not change)
+    before : 01d7520f13e1faaae158c9b1231c4c9f1d3db46e3576411b3536bd3cd6c0c3cc
+    after  : 01d7520f13e1faaae158c9b1231c4c9f1d3db46e3576411b3536bd3cd6c0c3cc
+    match  : True
+    mtime  : 2026-07-20 23:33:11 (unchanged)
+  twse_2026-07-20.json.bak  : fcc5401ffe781404b1101553d194c5f09b7868b205f98a31c7868cac05faefbf
+  finmind_index_twse.json   : 0f81b1ccfdfbf6e66d0b60759f84cc09c3998fa2ea699b63eca34db8a357be64 (62 rows, unchanged)
+
+  This backfill created exactly two files and modified none:
+    data/raw/market_index/twse_official_2026-07-20.json   (new)
+    loop/evidence/test_logs/twse_20260720_backfill_receipt.txt (this receipt)
+  scripts/run_stock_score_diagnostic.py has mtime 2026-07-29 07:00:02, which
+  predates this session's first action (09:35). It was NOT modified here.
+
+[10] DOES THE DIAGNOSTIC ACTUALLY CONSUME THE NEW FILE?  YES - NO CODE CHANGE NEEDED
+  load_taiex() globs "twse_*.json", which already matches twse_official_2026-07-20.json,
+  and lines 307-311 already strip the "twse_official_" prefix before parsing the
+  filename date. Both were pre-existing (the C17 "branch for a filename that does not
+  exist" observation); this backfill is what makes that branch live. Without it,
+  removeprefix("twse_") would yield "official_2026-07-20" and the file would be
+  rejected as an invalid filename date.
+
+  Read-only verification with the UNMODIFIED script:
+    final rows            : 66 -> 67
+    official_files        : 7 -> 8
+    official_rows_accepted: 5 -> 6
+    official_parse_failures: 0 (unchanged)
+    date range            : 2026-04-20 .. 2026-07-24 (unchanged)
+    overlap_conflicts     : [] (the new date is additive, it overrides nothing)
+    2026-07-20 present    : True, close = 42449.70
+
+    2026-07-15  45631.59
+    2026-07-16  45624.98
+    2026-07-17  42671.27
+    2026-07-20  42449.70   <-- newly available
+    2026-07-21  44232.87
+    2026-07-22  44825.78
+    2026-07-23  44850.81
+    2026-07-24  43654.84
+
+  The two pre-existing contaminated snapshots are still correctly rejected:
+    twse_2026-07-18.json  file_date 2026-07-18 vs reported 2026-07-17  -> rejected
+    twse_2026-07-20.json  file_date 2026-07-20 vs reported 2026-07-17  -> rejected
+
+[11] DIAGNOSTIC RERUN - HORIZON AVAILABILITY (wide universe)
+  Attribution note: the 00:30 baseline run used an older copy of
+  run_stock_score_diagnostic.py (mtime 07:00 today), so it is not a clean control.
+  A controlled in-process A/B was therefore run under the CURRENT script, varying
+  only the presence of the 2026-07-20 TAIEX row. It reproduced the baseline numbers
+  exactly, confirming the 07:00 edit had no effect on these metrics and the whole
+  delta belongs to this backfill.
+
+   h | wide-univ trade dates | wide-univ stock-days |      all stock-days
+  ---+-----------------------+----------------------+---------------------------
+   1 |          3 ->  5 (+2) |  5803 -> 9669 (+3866)|  40216 -> 44082 (+3866)
+   3 |          1 ->  3 (+2) |  1910 -> 5733 (+3823)|  35069 -> 40019 (+4950)
+   5 |          0 ->  1 (+1) |     0 -> 1879 (+1879)|  31938 -> 36060 (+4122)
+  10 |          0 ->  0 (+0) |     0 ->    0    (+0)|  28964 -> 31746 (+2782)
+  20 |          0 ->  0 (+0) |     0 ->    0    (+0)|  23211 -> 25944 (+2733)
+
+  Why one missing index day cost far more than one day: market_trade_dates is built
+  from OHLCV (which already had 2026-07-20), while forward returns require every
+  date in the window to exist in the TAIEX index. Every overlapping window that
+  straddled 2026-07-20 was therefore voided, as was entry 2026-07-21 (whose return
+  origin is the preceding market close, 2026-07-20).
+
+[12] HEADLINE - UNCHANGED
+  BEFORE: 樣本不足，不可裁決
+  AFTER : 樣本不足，不可裁決   (no change; correctly still not decisive)
+    10d D10-D1     : 0.004662 (0.4662pp) -> 0.005396 (0.5396pp)
+    Spearman       : 0.0788 -> 0.1758   (rank rule needs > 0.5; still not met)
+    daily D10-D1   : +2.0714% -> +1.7730%
+    Newey-West t   : 1.8166 -> 1.5711   (lag 9, unchanged)
+    n days         : 43 -> 48
+    positive rate  : 0.7209 -> 0.6875
+    min decile n   : 2,365 -> 2,639     (requirement >= 10,000; still not met)
+  The 10d/20d wide-universe samples remain 0 trade dates, so the verdict must and
+  does stay "sample insufficient, not decisive". No decisiveness was claimed.
+
+[13] CONSTRAINTS
+  Files modified: none. Files created: 2 (listed in section 9).
+  No src/, run_daily.py, daily_orchestrator.py, run_backtest.py or config change.
+  No weight change. No pipeline rerun. Nothing under data/processed or outputs/
+  written (newest mtimes there remain 2026-07-28). No commit made.
+  FinMind was never invoked: fetch_history_finmind.py was neither run nor imported,
+  and finmind_index_twse.json is byte-identical.

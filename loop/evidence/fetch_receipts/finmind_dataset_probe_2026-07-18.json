@@ -1,0 +1,81 @@
+{
+  "probe_date": "2026-07-18",
+  "purpose": "M5b dry-run verification of which FinMind v4 dataset names actually work on the project's token, before writing any code that assumes a dataset name (governing instruction: dataset names must never be recited from memory).",
+  "endpoint": "https://api.finmindtrade.com/api/v4/data",
+  "token_source": "FINMIND_API_KEY found in C:/Workspace_CN/.env (read-only reference per milestone brief)",
+  "network_note": "Initial attempts via Python requests hit ConnectTimeout while curl.exe succeeded on the same host; root cause was NOT a real outage -- api.finmindtrade.com DNS resolution was transiently inconsistent (PowerShell Resolve-DnsName briefly returned the sandbox's 10.0.0.1 sinkhole address seen in the M5a network outage, while curl and later Python retries resolved the real IP 139.162.104.254). Once verify=False (matching this project's existing TWSE/TPEx fetch convention) was used together with a retry, connectivity was normal for the rest of this session.",
+  "confirmed_working_datasets": [
+    {
+      "dataset": "TaiwanStockInfo",
+      "params_used": {},
+      "http_status": 200,
+      "msg": "success",
+      "row_count": 4281,
+      "sample_fields": ["industry_category", "stock_id", "stock_name", "type", "date"],
+      "note": "type field distinguishes twse/tpex. industry_category is a Chinese-language sector label, e.g. 電腦及週邊設備業. Only one index-like row found: stock_id=TAIEX, industry_category=大盤."
+    },
+    {
+      "dataset": "TaiwanStockPrice",
+      "params_used": {"data_id": "2330", "start_date": "2026-07-01", "end_date": "2026-07-10"},
+      "http_status": 200,
+      "msg": "success",
+      "row_count": 7,
+      "sample_fields": ["date", "stock_id", "Trading_Volume", "Trading_money", "open", "max", "min", "close", "spread", "Trading_turnover"],
+      "note": "Per-stock OHLCV, one call covers the whole date range (not one-call-per-day)."
+    },
+    {
+      "dataset": "TaiwanStockPrice",
+      "params_used": {"data_id": "TAIEX", "start_date": "2026-07-01", "end_date": "2026-07-10"},
+      "http_status": 200,
+      "msg": "success",
+      "row_count": 7,
+      "note": "Same dataset also serves the TAIEX index when data_id=TAIEX -- used as the market_index source for TWSE."
+    },
+    {
+      "dataset": "TaiwanStockInstitutionalInvestorsBuySell",
+      "params_used": {"data_id": "2330", "start_date": "2026-07-01", "end_date": "2026-07-10"},
+      "http_status": 200,
+      "msg": "success",
+      "row_count": 35,
+      "sample_fields": ["date", "stock_id", "buy", "name", "sell"],
+      "note": "5 rows per day (one per institutional-investor sub-category: Foreign_Dealer_Self, Foreign_Investor, Investment_Trust, Dealer_self, Dealer_Hedging) for 7 trading days = 35 rows."
+    },
+    {
+      "dataset": "TaiwanStockMarginPurchaseShortSale",
+      "params_used": {"data_id": "2330", "start_date": "2026-07-01", "end_date": "2026-07-10"},
+      "http_status": 200,
+      "msg": "success",
+      "row_count": 7,
+      "sample_fields": ["date", "stock_id", "MarginPurchaseBuy", "MarginPurchaseCashRepayment", "MarginPurchaseLimit", "MarginPurchaseSell", "MarginPurchaseTodayBalance", "MarginPurchaseYesterdayBalance", "Note", "OffsetLoanAndShort", "ShortSaleBuy", "ShortSaleCashRepayment", "ShortSaleLimit", "ShortSaleSell", "ShortSaleTodayBalance", "ShortSaleYesterdayBalance"]
+    },
+    {
+      "dataset": "TaiwanStockTotalReturnIndex",
+      "params_used": {"data_id": "TAIEX", "start_date": "2026-07-01", "end_date": "2026-07-10"},
+      "http_status": 200,
+      "msg": "success",
+      "row_count": 7,
+      "sample_fields": ["price", "stock_id", "date"],
+      "note": "Alternate TAIEX source (total-return index, not used -- TaiwanStockPrice/TAIEX chosen instead for OHLC parity with per-stock data)."
+    }
+  ],
+  "confirmed_unavailable_or_rejected": [
+    {"dataset": "TaiwanStockTotalReturnIndex", "params_used": {}, "http_status": 400, "msg": "parameter data_id can't be none on TaiwanStockTotalReturnIndex dataset"},
+    {"dataset": "TaiwanStockPrice", "data_id_tried": ["OTC", "TPEX", "TWO", "OTC50", "Y9999", "IX0043", "IX0044", "TWOTCI"], "http_status": 200, "msg": "success", "row_count": 0, "note": "HTTP 200 with zero rows for every plausible OTC/TPEx index code tried -- treated as OTC_INDEX_UNAVAILABLE, not fabricated."},
+    {"dataset": "TaiwanStockTotalReturnIndex", "data_id_tried": ["OTC"], "http_status": 200, "msg": "success", "row_count": 0},
+    {"dataset": "TaiwanStockMarketValueWeight", "http_status": 400, "msg": "Your level is register. Please update your user level. Detail information:https://finmindtrade.com/analysis/#/Sponsor/sponsor", "note": "Paid-tier-only dataset on this token; not needed for M5b scope."},
+    {"dataset": "TaiwanVariousIndicators5Day", "params_used": {"data_id": "2330"}, "http_status": 422, "msg": null, "note": "Rejected; not investigated further, not needed for this milestone."}
+  ],
+  "index_search_in_TaiwanStockInfo": {
+    "method": "Searched all 4281 TaiwanStockInfo rows for stock_name containing 指數 or industry_category containing 指數 or industry_category == 大盤",
+    "matches_found": 178,
+    "conclusion": "All 178 matches are ETFs/ETNs tracking various indices (industry_category = 上柜指數股票型基金(ETF) or 指數股票型憑證(ETN)), not a raw OTC/TPEx market index series itself. Only genuine index-type entry (industry_category=大盤) is TAIEX."
+  },
+  "conclusion": {
+    "ohlcv": "USABLE -- TaiwanStockPrice, data_id=<stock_id>",
+    "institutional": "USABLE -- TaiwanStockInstitutionalInvestorsBuySell, data_id=<stock_id>",
+    "margin": "USABLE -- TaiwanStockMarginPurchaseShortSale, data_id=<stock_id>",
+    "market_index_twse": "USABLE -- TaiwanStockPrice, data_id=TAIEX",
+    "market_index_tpex": "UNAVAILABLE -- no working OTC/TPEx index series found on this token after 8 plausible data_id candidates; not fabricated",
+    "stock_info_for_chinese_sector_names": "USABLE -- TaiwanStockInfo, industry_category field is a real Chinese-language sector label"
+  }
+}

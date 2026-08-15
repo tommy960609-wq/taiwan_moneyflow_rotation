@@ -1,0 +1,53 @@
+{
+  "trade_date": "2026-07-28",
+  "results": {
+    "ohlcv": {
+      "twse": {
+        "row_count": 1373,
+        "http_status": 200
+      },
+      "tpex": {
+        "row_count": 1013,
+        "http_status": 200
+      }
+    },
+    "institutional": {
+      "twse": {
+        "row_count": 1335,
+        "http_status": 200
+      },
+      "tpex": {
+        "row_count": 916,
+        "http_status": 200
+      }
+    },
+    "margin": {
+      "twse": {
+        "row_count": 1291,
+        "http_status": 200
+      },
+      "tpex": {
+        "row_count": 913,
+        "http_status": 200
+      }
+    },
+    "market_index": {
+      "twse": {
+        "row_count": 267,
+        "http_status": 200
+      },
+      "tpex": null
+    }
+  },
+  "failures": [
+    {
+      "category": "market_index",
+      "market": "tpex",
+      "trade_date": "2026-07-28",
+      "url": "https://www.tpex.org.tw/openapi/v1/tpex_index",
+      "error": "DATE_MISMATCH",
+      "payload_date": "2026-08-03"
+    }
+  ],
+  "historical_recovery": []
+}

@@ -1,0 +1,53 @@
+{
+  "probe_time": "2026-07-18",
+  "conclusion": "No direct adjusted-price dataset exists on this FinMind token (all TaiwanStockPriceAdj* candidates -> HTTP 400/422). Fallback path used: TaiwanStockDividendResult (per-stock ex-dividend event list with before_price/after_price reference prices) IS available and verified live -- used to compute backward-adjustment factors ourselves.",
+  "candidates_tried": {
+    "TaiwanStockPriceAdj": {
+      "http_status": 400,
+      "error": "HTTP 400",
+      "success": false
+    },
+    "TaiwanStockPriceAdjusted": {
+      "http_status": 422,
+      "error": "HTTP 422",
+      "success": false
+    },
+    "TaiwanStockAdjPrice": {
+      "http_status": 422,
+      "error": "HTTP 422",
+      "success": false
+    },
+    "TaiwanStockPriceAdjustment": {
+      "http_status": 422,
+      "error": "HTTP 422",
+      "success": false
+    },
+    "TaiwanStockPriceAdjustmentFactor": {
+      "http_status": 422,
+      "error": "HTTP 422",
+      "success": false
+    },
+    "TaiwanStockAdjustment": {
+      "http_status": 422,
+      "error": "HTTP 422",
+      "success": false
+    },
+    "TaiwanStockDividendResult": {
+      "http_status": 200,
+      "success": true,
+      "rows": 26,
+      "sample": {
+        "date": "2026-06-11",
+        "stock_id": "2330",
+        "before_price": 2255.0,
+        "after_price": 2248.99,
+        "stock_and_cache_dividend": 6.0,
+        "stock_or_cache_dividend": "息",
+        "max_price": 2470.0,
+        "min_price": 2025.0,
+        "open_price": 2250.0,
+        "reference_price": 2248.99
+      }
+    }
+  }
+}

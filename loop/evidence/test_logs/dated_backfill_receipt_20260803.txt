@@ -1,0 +1,161 @@
+TASK-20260803-moneyflow-dated-backfill -- execution receipt
+Executed by: Claude (Codex job task-msdcffnj-m2301u died at 22:51 after writing nothing; not re-delegated)
+Date: 2026-08-03 23:20 ~ 23:45 (local)
+
+================================================================================
+1. ROOT CAUSE (verified on disk and live, not inferred)
+================================================================================
+outputs/daily/ stopped at MoneyFlow_Rotation_2026-07-27.xlsx (written 7/28 07:03).
+2026-07-28, 07-29, 07-30, 07-31 and 08-03 produced nothing.
+
+  a) Every URL in src/data_fetcher.ENDPOINTS except TWSE T86 serves only its own
+     latest trading day and ignores any date parameter. A re-run for a past date
+     fetched "today", the DATE_MISMATCH guard (correctly) dropped it, and
+     scripts/run_daily.py L559 BLOCKED_MISSING_MARKET fired. Permanent.
+  b) daily_orchestrator additionally skipped the fetch atom outright for past
+     dates (SKIPPED_UNDATED_ENDPOINT_FOR_PAST_DATE), so nothing was even tried.
+  c) DEFAULT_BACKFILL_LOOKBACK_DAYS = 5 calendar days = 3-4 trading days; one
+     weekend plus one failed run pushed 07-28 and 07-29 out of the window.
+
+  Evidence: outputs/logs/orchestrator_batch_summary_2026-08-03.json,
+            outputs/logs/run_2026-07-{28,29,30,31}.log
+
+  Separately: MoneyFlow_AutoBackfill_1830 and _2000 both returned 0x800710E0 on
+  8/03 (all three tasks have DisallowStartIfOnBatteries = True). Only the 22:00
+  task ran. NOT fixed here -- it is a Windows setting change, pending approval.
+
+================================================================================
+2. DATED ENDPOINTS (probed live against 2026-07-30 before any code was written)
+================================================================================
+  ohlcv/twse          www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX  ?date=YYYYMMDD&type=ALLBUT0999
+  ohlcv/tpex          www.tpex.org.tw/www/zh-tw/afterTrading/otc     ?date=YYYY/MM/DD&type=EW
+  institutional/twse  (already dated: T86)
+  institutional/tpex  www.tpex.org.tw/www/zh-tw/insti/dailyTrade     ?date=YYYY/MM/DD
+  margin/twse         www.twse.com.tw/rwd/zh/marginTrading/MI_MARGN  ?date=YYYYMMDD&selectType=ALL
+  margin/tpex         www.tpex.org.tw/www/zh-tw/margin/balance       ?date=YYYY/MM/DD
+  market_index/twse   same MI_INDEX response, 價格指數 tables
+  market_index/tpex   NONE FOUND (4 candidates all returned the site's 404 page)
+                      -> left unavailable, not faked. It has only ever landed once
+                         (twse... tpex_2026-07-17.json), and the pipeline does not
+                         block on it.
+
+  TRAP recorded: TPEx's legacy stk_quote_result.php ACCEPTS d=115/07/30 and then
+  returns date=20260803. Never use it.
+
+================================================================================
+3. CHANGES
+================================================================================
+  src/data_fetcher.py
+    + DATED_ENDPOINTS, _DATED_TABLE_SIGNATURES, _DATED_COLUMN_MAPS, _DATED_DATE_KEY
+    + _build_dated_url, _iso_to_roc, _strip_html, _clean_cell, _find_dated_table,
+      _normalize_index_tables, normalize_dated_payload
+    + DataFetcher._fetch_dated_envelope
+    ~ fetch_and_save: on undated failure OR DATE_MISMATCH, try the dated endpoint;
+      metadata now carries source = "undated" | "dated".
+      Same-day success path is unchanged and never calls the dated endpoint
+      (pinned by test_fetch_and_save_same_day_success_never_calls_the_dated_endpoint).
+  scripts/daily_orchestrator.py
+    ~ DEFAULT_BACKFILL_LOOKBACK_DAYS 5 -> 10
+    - removed the blanket past-date fetch skip
+  scripts/fetch_daily_data.py
+    ~ run_single_day passes skip_existing=True for any date that is not today, so
+      a backfill can never re-fetch or overwrite an already-verified snapshot.
+  tests/unit/test_data_fetcher_dated.py (new, 16 tests)
+  tests/unit/test_data_fetcher.py, tests/unit/test_tpex_historical_recovery.py,
+  tests/integration/test_daily_orchestrator.py (3 assertions updated -- see §6)
+
+  NOT touched: src/data_cleaner.py, src/stock_scoring.py, src/signal_detector.py,
+  src/backtester.py, scripts/run_daily.py, config/default.yaml,
+  scripts/run_stock_score_diagnostic.py. No weight, threshold or gate changed.
+  FinMind never called.
+
+================================================================================
+4. TESTS
+================================================================================
+  before: 523 collected (522 passed + 1 pre-existing stale count assertion)
+  after : 540 passed, 0 failed        (+16 new, +1 restructured)
+
+  Red-green self-proof (loop/evidence/test_logs/dated_backfill_redgreen.txt):
+  each guard reverted -> its test went RED -> file restored byte-identically
+  (sha256 8539844a4f3efeadd7bc418ee3856639bd5a0d7288d638f861267750a46e17aa
+   before and after all four cases).
+    A. _find_dated_table requires EXACTLY one match      RED / restored OK
+    B. envelope-level date check                          RED / restored OK
+    C. institutional/tpex column offsets                  RED / restored OK
+    D. column-count check                                 RED / restored OK
+
+================================================================================
+5. BACKFILL RESULT
+================================================================================
+  2026-07-28  SUCCESS  exit=0  dq=90.5
+  2026-07-29  SUCCESS  exit=0  dq=90.5
+  2026-07-30  SUCCESS  exit=0  dq=90.0
+  2026-07-31  SUCCESS  exit=0  dq=90.5
+  (2026-08-03 deliberately NOT run: TWSE's own feed still self-reports 20260731
+   as its latest date, so the readiness gate correctly defers.)
+
+  Only market_index/tpex failed each day -- expected, no dated source exists.
+
+  Produced: MoneyFlow_Rotation_2026-07-{28,29,30,31}.xlsx
+            stock_scored / sector_scored / *_features CSVs for all four days
+            signals_2026-07-{28..31}.jsonl (53 events on 7/28)
+
+  Side effects: data/raw went 4939 -> 4991 files. All 52 additions belong to the
+  four backfilled dates. ZERO existing files changed (full-tree SHA-256 diff:
+  _workbench/out/raw_sha_{before,after}_backfill.txt, no "<=" entries).
+  24 new files in data/processed, all for the four new dates.
+
+================================================================================
+6. CROSS-VALIDATION
+================================================================================
+  a) Dated normalizer vs the live undated OpenAPI feed, same day (2026-07-31),
+     stock by stock:
+        1,373 codes in common, 9,611 fields compared
+        36 differences, ALL of the form "0.00" (OpenAPI) vs "--" (dated)
+        REAL NUMERIC DISAGREEMENTS: 0
+     Those 36 are non-traded ETFs; both forms are rejected by clean_ohlcv_data's
+     op<=0 filter, so the cleaned output is identical.
+
+  b) TAIEX continuity -- each day's reported change reconciles exactly with the
+     previous day's close:
+        07-27 43,634.19  (TWSE API, for reference; no file on disk)
+        07-28 41,603.36  = 43,634.19 - 2,030.83   OK   (-4.65%)
+        07-29 40,039.18  = 41,603.36 - 1,564.18   OK   (-3.76%)
+        07-30 39,933.30  = 40,039.18 -   105.88   OK   (-0.26%)
+        07-31 43,119.75  = 39,933.30 + 3,186.45   OK   (+7.98%)
+     The 07-31 file came from the UNDATED feed, i.e. a different endpoint from the
+     dated one that produced 07-30 -- so the +3,186.45 reconciliation is genuine
+     independent corroboration of the dated 07-30 close.
+     寶島股價指數 moves in parallel (-4.80%, +7.89%), consistent.
+     NOTE FOR THE READER: these are large moves. They are what TWSE itself
+     publishes; they are not an artifact of this backfill.
+
+  c) All 20 backfilled raw files self-report exactly the date they are filed
+     under (0 wrong or mixed).
+
+  d) FinMind cross-check NOT possible: the on-disk FinMind history ends
+     2026-07-17, so it covers none of the four dates. Stated rather than skipped
+     quietly. (a) is the stronger check and it passed.
+
+================================================================================
+7. SCHEDULED TASKS (done 2026-08-03 23:5x, on explicit user authorization)
+================================================================================
+  MoneyFlow_AutoBackfill_1830 / _2000 / _2200, all three changed from:
+      DisallowStartIfOnBatteries  true  -> false
+      StopIfGoingOnBatteries      true  -> false
+      StartWhenAvailable          false -> true    (missed runs now catch up)
+  Verified after the change; Enabled still true, triggers unchanged
+  (18:30 / 20:00 / 22:00), action still scripts/daily_run.bat. Nothing else
+  in the task definitions was touched.
+
+  Why: on 2026-08-03 the 18:30 and 20:00 tasks both returned 0x800710E0
+  ("the operator or administrator has refused the request") because the machine
+  was on battery; only the 22:00 run executed. Three chances a day is the point
+  of having three tasks.
+
+================================================================================
+8. NOT DONE
+================================================================================
+  - market_index/tpex dated source: none exists. Still unavailable.
+  - 2026-08-03: waiting on TWSE. Will be picked up automatically once published.
+  - Beads sync: `bd` is not on PATH in this shell.

@@ -1,0 +1,11 @@
+{
+  "mode": "smoke",
+  "endpoint": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
+  "probe_date": "2026-07-17",
+  "success": true,
+  "http_status": 200,
+  "error": null,
+  "row_count": 1371,
+  "sha256": "21be085bce3210a894599c68e45623cec267b0b7d5b4cfef2ac6d2f7683ea5fb",
+  "sample_path": "C:/Workspace_CN/taiwan_moneyflow_rotation/data\\raw\\ohlcv\\_smoke_twse_sample.json"
+}

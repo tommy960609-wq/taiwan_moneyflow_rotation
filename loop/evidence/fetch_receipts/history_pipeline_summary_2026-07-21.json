@@ -1,0 +1,470 @@
+{
+  "requested_start": "2026-04-20",
+  "requested_end": "2026-07-20",
+  "dates_processed": [
+    {
+      "trade_date": "2026-04-20",
+      "status": "SUCCESS",
+      "elapsed_sec": 7.77,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-20.jsonl"
+    },
+    {
+      "trade_date": "2026-04-21",
+      "status": "SUCCESS",
+      "elapsed_sec": 7.82,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-21.jsonl"
+    },
+    {
+      "trade_date": "2026-04-22",
+      "status": "SUCCESS",
+      "elapsed_sec": 7.9,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-22.jsonl"
+    },
+    {
+      "trade_date": "2026-04-23",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.11,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-23.jsonl"
+    },
+    {
+      "trade_date": "2026-04-24",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.87,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-24.jsonl"
+    },
+    {
+      "trade_date": "2026-04-27",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.26,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-27.jsonl"
+    },
+    {
+      "trade_date": "2026-04-28",
+      "status": "SUCCESS",
+      "elapsed_sec": 7.96,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-28.jsonl"
+    },
+    {
+      "trade_date": "2026-04-29",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.36,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-29.jsonl"
+    },
+    {
+      "trade_date": "2026-04-30",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.11,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-30.jsonl"
+    },
+    {
+      "trade_date": "2026-05-04",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.39,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-04.jsonl"
+    },
+    {
+      "trade_date": "2026-05-05",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.12,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-05.jsonl"
+    },
+    {
+      "trade_date": "2026-05-06",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.2,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-06.jsonl"
+    },
+    {
+      "trade_date": "2026-05-07",
+      "status": "SUCCESS",
+      "elapsed_sec": 9.28,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-07.jsonl"
+    },
+    {
+      "trade_date": "2026-05-08",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.52,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-08.jsonl"
+    },
+    {
+      "trade_date": "2026-05-11",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.35,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-11.jsonl"
+    },
+    {
+      "trade_date": "2026-05-12",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.24,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-12.jsonl"
+    },
+    {
+      "trade_date": "2026-05-13",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.48,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-13.jsonl"
+    },
+    {
+      "trade_date": "2026-05-14",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.74,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-14.jsonl"
+    },
+    {
+      "trade_date": "2026-05-15",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.95,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-05-18",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.88,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-05-19",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.82,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-05-20",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.97,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-05-21",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.9,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-05-22",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.75,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-05-25",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.88,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-05-26",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.87,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-05-27",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.96,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-05-28",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.83,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-05-29",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.43,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-29.jsonl"
+    },
+    {
+      "trade_date": "2026-06-01",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.98,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-06-02",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.91,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-06-03",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.9,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-06-04",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.93,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-06-05",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.76,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-06-08",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.9,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-06-09",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.94,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-06-10",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.85,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-06-11",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.92,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-06-12",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.73,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-06-15",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.96,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-06-16",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.89,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-06-17",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.55,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-06-17.jsonl"
+    },
+    {
+      "trade_date": "2026-06-18",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.37,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-06-18.jsonl"
+    },
+    {
+      "trade_date": "2026-06-22",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.66,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-06-22.jsonl"
+    },
+    {
+      "trade_date": "2026-06-23",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.53,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-06-23.jsonl"
+    },
+    {
+      "trade_date": "2026-06-24",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.59,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-06-24.jsonl"
+    },
+    {
+      "trade_date": "2026-06-25",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.5,
+      "signal_count": 45,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-06-25.jsonl"
+    },
+    {
+      "trade_date": "2026-06-26",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.67,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-06-26.jsonl"
+    },
+    {
+      "trade_date": "2026-06-29",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.81,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-06-30",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.95,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-07-01",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.73,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-07-02",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.95,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-07-03",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.99,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-07-06",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.8,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-07-07",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.97,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-07-08",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.76,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-07-09",
+      "status": "SUCCESS",
+      "elapsed_sec": 8.8,
+      "signal_count": 46,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-07-09.jsonl"
+    },
+    {
+      "trade_date": "2026-07-13",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 4.27,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-07-14",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.76,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-07-15",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.96,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-07-16",
+      "status": "BLOCKED_LOW_DQ",
+      "elapsed_sec": 3.78,
+      "signal_count": 0
+    },
+    {
+      "trade_date": "2026-07-17",
+      "status": "SUCCESS",
+      "elapsed_sec": 14.15,
+      "signal_count": 53,
+      "signal_file": "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-07-17.jsonl"
+    }
+  ],
+  "days_success": 28,
+  "days_blocked": 34,
+  "total_signal_events": 1294,
+  "signals_per_day": {
+    "2026-04-20": 46,
+    "2026-04-21": 46,
+    "2026-04-22": 46,
+    "2026-04-23": 46,
+    "2026-04-24": 46,
+    "2026-04-27": 46,
+    "2026-04-28": 46,
+    "2026-04-29": 46,
+    "2026-04-30": 46,
+    "2026-05-04": 46,
+    "2026-05-05": 46,
+    "2026-05-06": 46,
+    "2026-05-07": 46,
+    "2026-05-08": 46,
+    "2026-05-11": 46,
+    "2026-05-12": 46,
+    "2026-05-13": 46,
+    "2026-05-14": 46,
+    "2026-05-29": 46,
+    "2026-06-17": 46,
+    "2026-06-18": 46,
+    "2026-06-22": 46,
+    "2026-06-23": 46,
+    "2026-06-24": 46,
+    "2026-06-25": 45,
+    "2026-06-26": 46,
+    "2026-07-09": 46,
+    "2026-07-17": 53
+  },
+  "elapsed_sec": 373.06,
+  "signal_files": [
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-20.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-21.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-22.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-23.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-24.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-27.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-28.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-29.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-04-30.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-04.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-05.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-06.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-07.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-08.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-11.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-12.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-13.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-14.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-05-29.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-06-17.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-06-18.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-06-22.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-06-23.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-06-24.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-06-25.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-06-26.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-07-09.jsonl",
+    "C:/Workspace_CN/taiwan_moneyflow_rotation/outputs\\signals\\signals_2026-07-17.jsonl"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "run_started_at": "2026-07-20 21:41:20",
+  "start_date": "2026-04-20",
+  "end_date": "2026-07-17",
+  "token_present": true,
+  "universe_size": 1963,
+  "categories": [
+    "ohlcv",
+    "institutional",
+    "margin"
+  ],
+  "per_category": {
+    "ohlcv": {
+      "success": 86,
+      "failed": 0,
+      "skipped_existing": 1877
+    },
+    "institutional": {
+      "success": 72,
+      "failed": 0,
+      "skipped_existing": 1736
+    },
+    "margin": {
+      "success": 0,
+      "failed": 0,
+      "skipped_existing": 0
+    }
+  },
+  "requests_made": 159,
+  "rate_limited": true,
+  "stopped_early": true,
+  "market_index": {
+    "twse": {
+      "row_count": 62
+    },
+    "tpex": "UNAVAILABLE_OR_FAILED"
+  },
+  "stock_info": {
+    "row_count": 4281
+  },
+  "elapsed_sec": 4799.95,
+  "failure_sample": [
+    {
+      "category": "market_index",
+      "market": "tpex",
+      "error": "OTC_INDEX_UNAVAILABLE"
+    },
+    {
+      "category": "institutional",
+      "stock_id": "8114",
+      "error": "RATE_LIMITED",
+      "http_status": 402
+    }
+  ],
+  "total_failures_logged": 2,
+  "run_finished_at": "2026-07-20 23:01:19"
+}

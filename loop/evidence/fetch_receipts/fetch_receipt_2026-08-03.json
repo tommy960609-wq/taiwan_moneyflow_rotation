@@ -1,0 +1,47 @@
+{
+  "trade_date": "2026-08-03",
+  "results": {
+    "ohlcv": {
+      "twse": {
+        "row_count": 1377,
+        "http_status": 200
+      },
+      "tpex": {
+        "row_count": 10199,
+        "http_status": 200
+      }
+    },
+    "institutional": {
+      "twse": {
+        "row_count": 1340,
+        "http_status": 200
+      },
+      "tpex": {
+        "row_count": 900,
+        "http_status": 200
+      }
+    },
+    "margin": {
+      "twse": {
+        "row_count": 1291,
+        "http_status": 200
+      },
+      "tpex": {
+        "row_count": 915,
+        "http_status": 200
+      }
+    },
+    "market_index": {
+      "twse": {
+        "row_count": 267,
+        "http_status": 200
+      },
+      "tpex": {
+        "row_count": 1,
+        "http_status": 200
+      }
+    }
+  },
+  "failures": [],
+  "historical_recovery": []
+}

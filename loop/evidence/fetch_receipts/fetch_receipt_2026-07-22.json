@@ -1,0 +1,73 @@
+{
+  "trade_date": "2026-07-22",
+  "results": {
+    "ohlcv": {
+      "twse": {
+        "row_count": 1371,
+        "http_status": 200
+      },
+      "tpex": {
+        "row_count": 10121,
+        "http_status": 200
+      }
+    },
+    "institutional": {
+      "twse": {
+        "row_count": 1336,
+        "http_status": 200
+      },
+      "tpex": null
+    },
+    "margin": {
+      "twse": {
+        "row_count": 1287,
+        "http_status": 200
+      },
+      "tpex": {
+        "row_count": 913,
+        "http_status": 200
+      }
+    },
+    "market_index": {
+      "twse": {
+        "row_count": 267,
+        "http_status": 200
+      },
+      "tpex": null
+    }
+  },
+  "failures": [
+    {
+      "category": "ohlcv",
+      "market": "tpex",
+      "trade_date": "2026-07-22",
+      "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
+      "error": "DATE_MISMATCH",
+      "payload_date": "2026-07-23"
+    },
+    {
+      "category": "institutional",
+      "market": "tpex",
+      "trade_date": "2026-07-22",
+      "url": "https://www.tpex.org.tw/openapi/v1/tpex_3insti_daily_trading",
+      "error": "DATE_MISMATCH",
+      "payload_date": "2026-07-23"
+    },
+    {
+      "category": "market_index",
+      "market": "tpex",
+      "trade_date": "2026-07-22",
+      "url": "https://www.tpex.org.tw/openapi/v1/tpex_index",
+      "error": "DATE_MISMATCH",
+      "payload_date": "2026-07-01"
+    }
+  ],
+  "historical_recovery": [
+    {
+      "category": "ohlcv",
+      "market": "tpex",
+      "source": "TPEx_HISTORICAL_WEB",
+      "row_count": 10121
+    }
+  ]
+}

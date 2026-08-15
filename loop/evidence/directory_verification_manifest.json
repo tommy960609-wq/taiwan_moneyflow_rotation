@@ -1,0 +1,154 @@
+{
+  "metadata": {
+    "verified_at": "2026-07-18 00:49:06",
+    "total_expected": 29,
+    "total_found": 29
+  },
+  "results": [
+    {
+      "relative_path": "config",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\config",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "data/raw/reports",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\data/raw/reports",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "data/raw/ohlcv",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\data/raw/ohlcv",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "data/raw/institutional",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\data/raw/institutional",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "data/raw/margin",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\data/raw/margin",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "data/raw/market_index",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\data/raw/market_index",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "data/raw/fundamentals",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\data/raw/fundamentals",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "data/reference",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\data/reference",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "data/processed",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\data/processed",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "data/test_fixtures",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\data/test_fixtures",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "src",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\src",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "tests/unit",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\tests/unit",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "tests/integration",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\tests/integration",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "tests/regression",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\tests/regression",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "tests/property",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\tests/property",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "tests/leakage",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\tests/leakage",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "tests/acceptance",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\tests/acceptance",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "scripts",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\scripts",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "outputs/daily",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\outputs/daily",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "outputs/charts",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\outputs/charts",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "outputs/backtests",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\outputs/backtests",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "outputs/logs",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\outputs/logs",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "docs",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\docs",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "loop/evidence/test_logs",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\loop/evidence/test_logs",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "loop/evidence/screenshots",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\loop/evidence/screenshots",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "loop/evidence/sample_outputs",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\loop/evidence/sample_outputs",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "loop/evidence/performance",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\loop/evidence/performance",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "loop/evidence/data_quality",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\loop/evidence/data_quality",
+      "status": "PASSED"
+    },
+    {
+      "relative_path": "loop/evidence/raw_samples",
+      "absolute_path": "C:/Workspace_CN/taiwan_moneyflow_rotation\\loop/evidence/raw_samples",
+      "status": "PASSED"
+    }
+  ]
+}

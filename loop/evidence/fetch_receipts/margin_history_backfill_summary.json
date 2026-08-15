@@ -1,0 +1,23 @@
+{
+  "run_started_at": "2026-07-21 10:05:33",
+  "start_date": "2026-04-20",
+  "end_date": "2026-07-20",
+  "total_dates": 92,
+  "twse": {
+    "saved": 22,
+    "skipped_existing": 41,
+    "skipped_non_trading_day": 29,
+    "failed": 0
+  },
+  "tpex": {
+    "saved": 22,
+    "skipped_existing": 41,
+    "skipped_non_trading_day": 29,
+    "failed": 0
+  },
+  "failed_dates": {
+    "twse": [],
+    "tpex": []
+  },
+  "run_finished_at": "2026-07-21 10:08:38"
+}
