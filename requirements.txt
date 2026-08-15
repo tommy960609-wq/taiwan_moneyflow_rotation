@@ -1,0 +1,15 @@
+pandas==3.0.2
+numpy==2.4.4
+openpyxl==3.1.5
+xlsxwriter==3.2.9
+pydantic==2.13.2
+pyyaml==6.0.3
+pytest==9.0.3
+loguru==0.7.3
+urllib3==2.3.0
+requests==2.32.3
+
+# Dev-only: not required to run the pipeline, only for `coverage run -m pytest ...`
+# (see loop/evidence/test_logs/coverage_first_measurement.txt for usage and the first
+# measurement, added M8). No CI gate is wired up to this yet.
+coverage==7.15.2

@@ -1,0 +1,30 @@
+# taiwan_moneyflow_rotation — 版控範圍
+#
+# 原則:只收「人寫的、決定系統行為的東西」(程式碼、設定、測試、規格、
+# 實驗註冊與帳本),不收「機器每天長出來的東西」(原始行情快照、報表輸出、
+# 暫存與快取)。後者可重新產生,且體積是前者的數百倍。
+
+# --- Python 執行環境與快取 ---
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# --- 每日資料(549 MB;原始行情快照與衍生特徵,可由來源重抓/重算)---
+data/
+
+# --- 報表輸出(27 MB;每日 Excel 與 log,由 data/ 重跑即可再生)---
+outputs/
+
+# --- 暫存工作區(專案慣例:一次性腳本、dry-run 輸出、pytest 暫存)---
+_workbench/
+_workbench*/
+
+# --- 大型原始樣本(9 MB,含單檔 4 MB;僅供人工比對,非系統依賴)---
+loop/evidence/raw_samples/
+
+# --- OS / 編輯器雜訊 ---
+Thumbs.db
+desktop.ini
+.DS_Store
