@@ -1,0 +1,24 @@
+{
+  "mode": "dry_run_no_fetch_no_pipeline",
+  "captured_at": "2026-07-22T20:44:51.708041",
+  "today": "2026-07-22",
+  "lookback_days": 5,
+  "gap_dates": [
+    "2026-07-21",
+    "2026-07-22"
+  ],
+  "official_latest_date": "2026-07-21",
+  "decisions": [
+    {
+      "trade_date": "2026-07-21",
+      "holiday_evidence": false,
+      "decision": "READY"
+    },
+    {
+      "trade_date": "2026-07-22",
+      "holiday_evidence": false,
+      "decision": "DEFERRED_NOT_READY"
+    }
+  ],
+  "expected_behavior": "ready dates would call run_daily_orchestration; deferred dates are skipped"
+}
